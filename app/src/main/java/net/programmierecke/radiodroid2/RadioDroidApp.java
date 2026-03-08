@@ -49,6 +49,8 @@ public class RadioDroidApp extends MultiDexApplication {
 
     private TrackMetadataSearcher trackMetadataSearcher;
 
+    private net.programmierecke.radiodroid2.database.AppDatabase database;
+
     private ConnectionPool connectionPool;
     private OkHttpClient httpClient;
 
@@ -114,7 +116,13 @@ public class RadioDroidApp extends MultiDexApplication {
 
         trackMetadataSearcher = new TrackMetadataSearcher(httpClient);
 
+        database = net.programmierecke.radiodroid2.database.AppDatabase.getDatabase(this);
+
         recordingsManager.updateRecordingsList();
+    }
+
+    public net.programmierecke.radiodroid2.database.AppDatabase getDatabase() {
+        return database;
     }
 
     public void setTestsInterceptor(Interceptor testsInterceptor) {
